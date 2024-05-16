@@ -1,0 +1,16 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.rulers": [120],
+  "editor.tabSize": 2,
+  "search.exclude": {
+    ".nyc_output/": true,
+    ".vscode-test/": true,
+    "*.vsix": true,
+    "coverage/": true,
+    "node_modules/": true,
+    "out/": true,
+    "yarn-error.log": true
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "name": "vscode-toggle-exclude-gitignore",
+  "displayName": "Toggle \"Exclude Git Ignore\"",
+  "description": "Toggle \"Explorer: Exclude Git Ignore\" setting globally to show or hide .gitignore'd files on the Explorer panel with a single command",
+  "icon": "doc/logo.png",
+  "version": "0.1.0",
+  "publisher": "earshinov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/earshinov/vscode-toggle-exclude-gitignore.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.24.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:earshinov.toggleExcludeGitIgnore.toggleExcludeGitIgnore"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "earshinov.toggleExcludeGitIgnore.toggleExcludeGitIgnore",
+        "title": "Explorer: Toggle Git Ignore"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "earshinov.toggleExcludeGitIgnore.toggleExcludeGitIgnore",
+        "key": "ctrl-alt-e",
+        "mac": "cmd-option-e"
+      }
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "prebuild": "yarn run clean",
+    "build": "tsc --noEmit -p . && babel src --out-dir out --extensions .js,.ts",
+    "build:dev": "tsc --noEmit -p . && babel src --out-dir out --extensions .js,.ts --source-maps",
+    "build:watch": "nodemon -e js,ts,json --watch src --watch .babelrc.js --exec \"babel src --out-dir out --extensions .js,.ts\"",
+    "lint": "prettier --check . && eslint src/**/*.ts",
+    "lint-fix": "prettier -w . && eslint --fix src/**/*.ts",
+    "pretest": "env BABEL_ENV=coverage yarn build && yarn run coverage:clean",
+    "test": "node ./out/test/runTest.js && yarn run nyc check-coverage",
+    "coverage:clean": "rimraf .nyc_output coverage",
+    "coverage:report": "nyc report --reporter=lcov --reporter=text-summary",
+    "vscode:prepublish": "yarn run clean && yarn build"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-typescript": "^7.7.2",
+    "@babel/register": "^7.0.0",
+    "@types/assert": "^1.4.7",
+    "@types/glob": "^7.1.2",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^10.0.0",
+    "@types/sinon": "^9.0.4",
+    "@types/vscode": "^1.24.0",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "assert": "^2.0.0",
+    "babel-plugin-istanbul": "^6.0.0",
+    "codecov": "^3.1.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsdoc": "^35.4.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.1",
+    "nyc": "^15.1.0",
+    "prettier": "^3.2.5",
+    "rimraf": "^3.0.2",
+    "sinon": "^9.0.2",
+    "test-exclude": "j03m/test-exclude#j03m/fix2",
+    "typescript": "^3.7.2",
+    "vsce": "^2.15.0"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/test/**/*.ts"
+    ],
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "checkCoverage": true,
+    "branches": 80,
+    "lines": 95,
+    "functions": 95,
+    "statements": 95
+  },
+  "packageManager": "yarn@1.22.1"
+}
