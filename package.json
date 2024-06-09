@@ -3,7 +3,7 @@
   "displayName": "Toggle \"Exclude Git Ignore\"",
   "description": "Toggle \"Explorer: Exclude Git Ignore\" setting globally to show or hide .gitignore'd files on the Explorer panel with a single command",
   "icon": "doc/logo.png",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "earshinov",
   "repository": {
     "type": "git",

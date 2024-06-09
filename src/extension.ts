@@ -11,11 +11,9 @@ export function activate(context: vscode.ExtensionContext): void {
 
       const value = !config.get(SETTING, false);
 
-      // When a workspace is opened, remove setting from workspace configuration, if it is present there
-      if (vscode.workspace.name != null) {
-        if (config.inspect(SETTING)?.workspaceValue !== undefined)
-          await config.update(SETTING, undefined, vscode.ConfigurationTarget.Workspace);
-      }
+      // Remove setting from workspace configuration, if it is present there
+      if (config.inspect(SETTING)?.workspaceValue !== undefined)
+        await config.update(SETTING, undefined, vscode.ConfigurationTarget.Workspace);
 
       await config.update(SETTING, value, vscode.ConfigurationTarget.Global);
     })
